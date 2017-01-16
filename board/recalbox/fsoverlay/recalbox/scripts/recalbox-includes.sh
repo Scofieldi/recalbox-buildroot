@@ -28,8 +28,8 @@ function containsElement {
 function shouldUpdate {
   rbxVersion=$_RBX/recalbox.version
   curVersion=$_SHARE/system/logs/lastrecalbox.conf.update
-  diff -qN "$curVersion" "$rbxVersion" 2>/dev/null && return 1
-  return 0
+  diff -qN "$curVersion" "$rbxVersion" 2>/dev/null && return 0
+  return 1
 }
 
 # Upgrade the recalbox.conf if necessary
@@ -39,7 +39,9 @@ function doRbxConfUpgrade {
   curVersion=$_SHARE/system/logs/lastrecalbox.conf.update
   
   # Check if an update is necessary
-  shouldUpdate && recallog -e "recalbox.conf already up-to-date" && return 0
+  if ! shouldUpdate;then 
+    recallog -e "recalbox.conf already up-to-date" && return 0
+  fi
   
   cfgIn=$_SHAREINIT/system/recalbox.conf
   cfgOut=$_SHARE/system/recalbox.conf
