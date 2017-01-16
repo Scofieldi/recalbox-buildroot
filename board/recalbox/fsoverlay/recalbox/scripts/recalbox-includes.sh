@@ -25,12 +25,15 @@ function containsElement {
   return 1
 }
 
+<<<<<<< HEAD
 function shouldUpdate {
   rbxVersion=$_RBX/recalbox.version
   curVersion=$_SHARE/system/logs/lastrecalbox.conf.update
   diff -qN "$curVersion" "$rbxVersion" 2>/dev/null && return 0
   return 1
 }
+=======
+>>>>>>> master
 
 # Upgrade the recalbox.conf if necessary
 function doRbxConfUpgrade {
@@ -79,6 +82,3 @@ function doRbxConfUpgrade {
 }
 
 
-function updateBoot {
-  sed -i '/^dtparam=/{h;s/=.*/=audio=on/};${x;/^$/{s//dtparam=audio=on/;H};x}' /boot/config.txt
-}
